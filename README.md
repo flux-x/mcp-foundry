@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/mcp-foundry-logo-1.png" height="240" alt="MCP Foundry">
+  <img src="docs/mcp-foundry-logo.png" height="240" alt="MCP Foundry">
 </p>
 
 <p align="center">
@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/your-org/mcp-foundry/actions">
+    <a href="https://github.com/flux-x/mcp-foundry/actions">
       <img src="https://img.shields.io/github/actions/workflow/status/flux-x/mcp-foundry/ci.yml?style=flat-square" alt="CI">
     </a>
     <a href="https://img.shields.io/badge/docs-coming_soon-blue?style=flat-square">
