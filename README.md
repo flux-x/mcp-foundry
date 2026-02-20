@@ -7,14 +7,14 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/flux-x/mcp-foundry/actions">
-      <img src="https://img.shields.io/github/actions/workflow/status/flux-x/mcp-foundry/ci.yml?style=flat-square" alt="CI">
+    <a href="https://github.com/flux-x/mcp-foundry/actions/workflows/ci.yml">
+      <img src="https://github.com/flux-x/mcp-foundry/actions/workflows/ci.yml/badge.svg" alt="CI">
     </a>
     <a href="https://img.shields.io/badge/docs-coming_soon-blue?style=flat-square">
       <img src="https://img.shields.io/badge/Docs-Coming_Soon-blue?style=flat-square" alt="Docs">
     </a>
     <a href="https://github.com/flux-x/mcp-foundry/blob/main/LICENSE">
-      <img src="https://img.shields.io/github/license/flux-x/mcp-foundry?style=flat-square" alt="License">
+      <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License">
     </a>
     <a href="ROADMAP.md">
       <img src="https://img.shields.io/badge/Roadmap-2026-orange.svg?style=flat-square" alt="Roadmap 2026">
