@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/mcp-foundry-logo.png" height="240" alt="MCP Foundry">
+  <img src="docs/mcp-foundry-logo-1.png" height="240" alt="MCP Foundry">
 </p>
 
 <p align="center">
