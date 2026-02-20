@@ -23,6 +23,7 @@ dev = [
   "pre-commit>=3.7",
   "ty>=0.0.17",
   "httpx>=0.28.1",
+  "autoflake>=2.3.3",
 ]
 
 [tool.uv.dependency-groups]

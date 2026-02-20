@@ -26,11 +26,17 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras --dev
 
-      - name: Install pre-commit
-        run: uv pip install pre-commit
+      - name: Check for unused imports and variables
+        run: uv run autoflake --check --recursive src tests
 
-      - name: Run pre-commit hooks
-        run: uv run pre-commit run --all-files
+      - name: Run ruff check
+        run: uv run ruff check .
+
+      - name: Run ruff format check
+        run: uv run ruff format --check .
+
+      - name: Run ty check
+        run: uv run ty check
 
       - name: Run tests
         run: uv run pytest tests/

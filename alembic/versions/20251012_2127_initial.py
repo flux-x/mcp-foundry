@@ -1,6 +1,3 @@
-from alembic import op
-import sqlalchemy as sa
-
 revision = "20251012_2127"
 down_revision = None
 branch_labels = None
