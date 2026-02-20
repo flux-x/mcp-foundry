@@ -3,7 +3,7 @@ from logging.config import fileConfig
 from sqlalchemy import create_engine, pool
 
 from alembic import context
-from src.core.config import settings
+from mcp_foundry.core.config import settings
 
 config = context.config
 if config.config_file_name is not None:

@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from src.main import app
+from mcp_foundry.main import app
 
 
 def test_health():
