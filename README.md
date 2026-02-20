@@ -13,7 +13,7 @@
     <a href="https://img.shields.io/badge/docs-coming_soon-blue?style=flat-square">
       <img src="https://img.shields.io/badge/Docs-Coming_Soon-blue?style=flat-square" alt="Docs">
     </a>
-    <a href="LICENSE">
+    <a href="https://github.com/flux-x/mcp-foundry/blob/main/LICENSE">
       <img src="https://img.shields.io/github/license/flux-x/mcp-foundry?style=flat-square" alt="License">
     </a>
     <a href="ROADMAP.md">
