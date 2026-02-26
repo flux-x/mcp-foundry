@@ -27,7 +27,7 @@ jobs:
         run: uv sync --all-extras --dev
 
       - name: Check for unused imports and variables
-        run: uv run autoflake --check --recursive src tests
+        run: uv run autoflake --check --recursive mcp_foundry tests
 
       - name: Run ruff check
         run: uv run ruff check .

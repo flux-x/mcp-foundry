@@ -50,4 +50,4 @@ addopts = "-q"
 pythonpath = ["."]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src"]
+packages = ["mcp_foundry"]
