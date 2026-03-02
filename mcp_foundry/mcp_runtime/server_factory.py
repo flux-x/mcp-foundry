@@ -1,5 +1,3 @@
-"""Build MCP server ASGI apps for a given McpServer configuration."""
-
 from mcp.server.fastmcp import FastMCP
 from qdrant_client.models import FieldCondition, Filter, MatchValue
 

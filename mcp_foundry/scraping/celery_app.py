@@ -1,5 +1,3 @@
-"""Celery application factory."""
-
 from celery import Celery
 
 from mcp_foundry.core.config import settings

@@ -1,5 +1,3 @@
-"""Text chunking and Qdrant ingestion for scraped pages."""
-
 import uuid
 
 from qdrant_client.models import PointStruct

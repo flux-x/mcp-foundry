@@ -1,5 +1,3 @@
-"""Web scraper using crawl4ai to extract markdown content from URLs."""
-
 from urllib.parse import urljoin, urlparse
 
 from crawl4ai import AsyncWebCrawler

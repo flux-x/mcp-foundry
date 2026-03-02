@@ -1,5 +1,3 @@
-"""Pydantic schemas for datasource API."""
-
 import uuid
 from datetime import datetime
 

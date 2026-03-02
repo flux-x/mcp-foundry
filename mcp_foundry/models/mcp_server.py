@@ -1,5 +1,3 @@
-"""McpServer ORM model."""
-
 import uuid
 from datetime import datetime
 
@@ -10,8 +8,6 @@ from mcp_foundry.core.database import Base
 
 
 class McpServer(Base):
-    """Represents a deployable MCP server backed by a Qdrant collection."""
-
     __tablename__ = "mcp_servers"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)

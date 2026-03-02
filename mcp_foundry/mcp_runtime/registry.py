@@ -1,5 +1,3 @@
-"""In-memory registry of active MCP server ASGI apps, mounted on the main FastAPI app."""
-
 from fastapi import FastAPI
 
 from mcp_foundry.mcp_runtime.server_factory import build_mcp_app
@@ -11,7 +9,6 @@ _mounted: dict[str, object] = {}
 
 
 def init_registry(app: FastAPI) -> None:
-    """Store a reference to the FastAPI app for dynamic mounting."""
     global _app_ref
     _app_ref = app
 

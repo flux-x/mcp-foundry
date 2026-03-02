@@ -1,5 +1,3 @@
-"""Qdrant client singleton and collection helpers."""
-
 from qdrant_client import AsyncQdrantClient
 from qdrant_client.models import Distance, VectorParams
 
@@ -9,7 +7,6 @@ _client: AsyncQdrantClient | None = None
 
 
 def get_qdrant() -> AsyncQdrantClient:
-    """Return the singleton AsyncQdrantClient, creating it if needed."""
     global _client
     if _client is None:
         _client = AsyncQdrantClient(
@@ -20,7 +17,6 @@ def get_qdrant() -> AsyncQdrantClient:
 
 
 async def ensure_collection(name: str, vector_size: int = settings.EMBEDDING_DIM) -> None:
-    """Create a Qdrant collection if it does not already exist."""
     client = get_qdrant()
     existing = await client.get_collections()
     names = {c.name for c in existing.collections}
@@ -32,5 +28,4 @@ async def ensure_collection(name: str, vector_size: int = settings.EMBEDDING_DIM
 
 
 async def delete_collection(name: str) -> None:
-    """Delete a Qdrant collection."""
     await get_qdrant().delete_collection(name)

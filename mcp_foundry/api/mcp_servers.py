@@ -1,5 +1,3 @@
-"""REST API router for MCP server management."""
-
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -22,7 +20,6 @@ router = APIRouter(prefix="/mcp-servers", tags=["mcp-servers"])
 async def create_mcp_server(
     body: McpServerCreate, db: AsyncSession = Depends(get_db)
 ) -> McpServerSchema:
-    """Create an MCP server configuration (not yet deployed)."""
     ds = await db.get(Datasource, body.datasource_id)
     if ds is None:
         raise HTTPException(status_code=404, detail="Datasource not found")
@@ -46,7 +43,6 @@ async def create_mcp_server(
 
 @router.get("", response_model=list[McpServerSchema])
 async def list_mcp_servers(db: AsyncSession = Depends(get_db)) -> list[McpServerSchema]:
-    """List all MCP servers."""
     rows = await db.execute(select(McpServer).order_by(McpServer.created_at.desc()))
     return [McpServerSchema.model_validate(s) for s in rows.scalars()]
 
@@ -55,7 +51,6 @@ async def list_mcp_servers(db: AsyncSession = Depends(get_db)) -> list[McpServer
 async def get_mcp_server(
     server_id: uuid.UUID, db: AsyncSession = Depends(get_db)
 ) -> McpServerSchema:
-    """Get an MCP server by ID."""
     server = await db.get(McpServer, server_id)
     if server is None:
         raise HTTPException(status_code=404, detail="MCP server not found")
@@ -66,7 +61,6 @@ async def get_mcp_server(
 async def update_mcp_server(
     server_id: uuid.UUID, body: McpServerUpdate, db: AsyncSession = Depends(get_db)
 ) -> McpServerSchema:
-    """Update name or tool description of a stopped MCP server."""
     server = await db.get(McpServer, server_id)
     if server is None:
         raise HTTPException(status_code=404, detail="MCP server not found")
@@ -85,7 +79,6 @@ async def update_mcp_server(
 async def deploy_mcp_server(
     server_id: uuid.UUID, db: AsyncSession = Depends(get_db)
 ) -> McpServerSchema:
-    """Deploy (activate) an MCP server, mounting its SSE endpoint."""
     from mcp_foundry.mcp_runtime.registry import mount_server
 
     server = await db.get(McpServer, server_id)
@@ -109,7 +102,6 @@ async def deploy_mcp_server(
 async def stop_mcp_server(
     server_id: uuid.UUID, db: AsyncSession = Depends(get_db)
 ) -> McpServerSchema:
-    """Stop an active MCP server, unmounting its SSE endpoint."""
     from mcp_foundry.mcp_runtime.registry import unmount_server
 
     server = await db.get(McpServer, server_id)
@@ -127,7 +119,6 @@ async def stop_mcp_server(
 
 @router.delete("/{server_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_mcp_server(server_id: uuid.UUID, db: AsyncSession = Depends(get_db)) -> None:
-    """Delete an MCP server config. Stop it first if active."""
     from mcp_foundry.mcp_runtime.registry import unmount_server
 
     server = await db.get(McpServer, server_id)
