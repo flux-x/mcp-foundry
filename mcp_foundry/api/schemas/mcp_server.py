@@ -1,5 +1,3 @@
-"""Pydantic schemas for MCP server API."""
-
 import uuid
 from datetime import datetime
 

@@ -1,5 +1,3 @@
-"""ScrapingJob ORM model."""
-
 import uuid
 from datetime import datetime
 
@@ -10,8 +8,6 @@ from mcp_foundry.core.database import Base
 
 
 class ScrapingJob(Base):
-    """Tracks a background scraping + ingestion run for a datasource."""
-
     __tablename__ = "scraping_jobs"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)

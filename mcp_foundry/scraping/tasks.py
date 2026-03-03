@@ -1,5 +1,3 @@
-"""Celery tasks for scraping and ingesting datasources."""
-
 import asyncio
 import uuid
 from datetime import UTC, datetime

@@ -1,5 +1,3 @@
-"""Datasource ORM model."""
-
 import uuid
 from datetime import datetime
 
@@ -10,8 +8,6 @@ from mcp_foundry.core.database import Base
 
 
 class Datasource(Base):
-    """Represents a URL source to scrape and ingest into Qdrant."""
-
     __tablename__ = "datasources"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
