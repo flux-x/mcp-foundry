@@ -13,12 +13,12 @@ def init_registry(app: FastAPI) -> None:
     _app_ref = app
 
 
-async def mount_server(server: McpServer, datasource: Datasource) -> None:
+async def mount_server(server: McpServer, datasource: Datasource | None) -> None:
     """Build and mount an MCP server at /mcp/{server_id}.
 
     Args:
         server: McpServer ORM instance.
-        datasource: Associated Datasource ORM instance.
+        datasource: Associated Datasource ORM instance (optional).
     """
     assert _app_ref is not None, "Registry not initialized"
     mcp = build_mcp_app(server, datasource)
@@ -65,6 +65,8 @@ async def restore_active_servers(app: FastAPI) -> None:
         rows = await session.execute(select(McpServer).where(McpServer.status == "active"))
         servers = rows.scalars().all()
         for server in servers:
-            ds = await session.get(Datasource, server.datasource_id)
-            if ds and ds.status == "ready":
+            ds = None
+            if server.datasource_id:
+                ds = await session.get(Datasource, server.datasource_id)
+            if (ds and ds.status == "ready") or server.tools_config:
                 await mount_server(server, ds)

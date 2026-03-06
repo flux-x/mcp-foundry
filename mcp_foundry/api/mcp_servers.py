@@ -20,18 +20,21 @@ router = APIRouter(prefix="/mcp-servers", tags=["mcp-servers"])
 async def create_mcp_server(
     body: McpServerCreate, db: AsyncSession = Depends(get_db)
 ) -> McpServerSchema:
-    ds = await db.get(Datasource, body.datasource_id)
-    if ds is None:
-        raise HTTPException(status_code=404, detail="Datasource not found")
-    if ds.status != "ready":
-        raise HTTPException(
-            status_code=400,
-            detail=f"Datasource is not ready (status: {ds.status}). Wait for scraping to complete.",
-        )
+    if body.datasource_id:
+        ds = await db.get(Datasource, body.datasource_id)
+        if ds is None:
+            raise HTTPException(status_code=404, detail="Datasource not found")
+        if ds.status != "ready":
+            raise HTTPException(
+                status_code=400,
+                detail=f"Datasource is not ready (status: {ds.status}). "
+                "Wait for scraping to complete.",
+            )
 
     server = McpServer(
         name=body.name,
         datasource_id=body.datasource_id,
+        tools_config=body.tools_config,
         tool_description=body.tool_description,
         status="stopped",
     )
@@ -70,6 +73,8 @@ async def update_mcp_server(
         server.name = body.name
     if body.tool_description is not None:
         server.tool_description = body.tool_description
+    if body.tools_config is not None:
+        server.tools_config = body.tools_config
     await db.commit()
     await db.refresh(server)
     return McpServerSchema.model_validate(server)
@@ -87,9 +92,17 @@ async def deploy_mcp_server(
     if server.status == "active":
         raise HTTPException(status_code=400, detail="Server is already active.")
 
-    ds = await db.get(Datasource, server.datasource_id)
-    if ds is None or ds.status != "ready":
-        raise HTTPException(status_code=400, detail="Datasource is not ready.")
+    ds = None
+    if server.datasource_id:
+        ds = await db.get(Datasource, server.datasource_id)
+        if ds is None or ds.status != "ready":
+            raise HTTPException(status_code=400, detail="Datasource is not ready.")
+
+    if not ds and not server.tools_config:
+        raise HTTPException(
+            status_code=400,
+            detail="Server must have a datasource or tools configured.",
+        )
 
     await mount_server(server, ds)
     server.status = "active"
