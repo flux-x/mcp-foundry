@@ -9,7 +9,6 @@ from mcp_foundry.models.mcp_server import McpServer
 
 @pytest.mark.asyncio
 async def test_build_mcp_app_generic_tools():
-    # Mock server with a generic tool config
     server = McpServer(
         id=uuid.uuid4(),
         name="Test Tools Server",
@@ -29,10 +28,8 @@ async def test_build_mcp_app_generic_tools():
         ],
     )
 
-    # Build the app with no datasource
     app = build_mcp_app(server, None)
 
-    # Verify tool was registered
     tools = await app.list_tools()
     assert len(tools) == 1
     assert tools[0].name == "send_email"
@@ -62,8 +59,6 @@ async def test_invoke_generic_tool():
 
     app = build_mcp_app(server, None)
 
-    # FastMCP stores registered tools dynamically.
-    # We can invoke it directly from the dict of wrappers.
     tool_callable = None
     for tool_name, wrapper in app._tool_manager._tools.items():
         if tool_name == "send_email":
@@ -77,7 +72,6 @@ async def test_invoke_generic_tool():
     mock_response.raise_for_status = AsyncMock()
 
     with patch("httpx.AsyncClient.post", return_value=mock_response) as mock_post:
-        # Call the dynamically generated function
         result = await tool_callable(to="test@example.com", subject="Hello")
 
         assert mock_post.called
