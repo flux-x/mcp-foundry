@@ -1,0 +1,23 @@
+[
+    {
+        "name": "send_email",
+        "description": "Sends an email to a user",
+        "webhook_url": "http://127.0.0.1:8001/send-email",
+        "parameters": {
+            "properties": {
+                "to": {
+                    "type": "string",
+                    "description": "Email address of the recipient"
+                },
+                "subject": {
+                    "type": "string",
+                    "description": "Email subject"
+                }
+            },
+            "required": [
+                "to",
+                "subject"
+            ]
+        }
+    }
+]
